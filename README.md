@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spendwise Business
 
-## Getting Started
+**A multi-tenant business expense and budget management platform.**
 
-First, run the development server:
+Spendwise Business is a full-stack SaaS-style web application designed to help organizations manage department budgets, employee expense requests, approval workflows, and financial reporting through a centralized platform.
+
+Built as a portfolio project with a focus on secure data isolation, role-based access control, and real-world business workflows.
+
+## Tech Stack
+
+- **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS
+- **Backend:** Next.js API Routes, Supabase
+- **Database:** PostgreSQL
+- **Authentication:** Supabase Auth
+- **Security:** Row Level Security (RLS), role-based access control
+- **Deployment:** Vercel (planned)
+
+## Key Features
+
+### Organization Management
+- Organization onboarding and workspace setup
+- Multi-tenant architecture with organization-level data isolation
+- Single-organization membership per user account
+- Invitation-based team membership
+
+### Role-Based Access Control
+Four user roles with different permissions:
+
+- **Owner:** Organization administration and full financial visibility
+- **Finance Manager:** Company-wide budget and expense management
+- **Department Manager:** Department-scoped financial visibility
+- **Employee:** Expense request submission with limited access
+
+### Budget Management
+- Monthly department budgets
+- Budget allocation and updates
+- Automatic monthly budget renewal
+- Budget utilization and remaining balance tracking
+- Historical budget separation
+
+### Expense Requests and Approvals
+- Employee expense request submission
+- Approval and rejection workflows
+- Role-based authorization
+- Expense status tracking
+- Payment recording
+
+### Reporting
+- Monthly and yearly financial reports
+- Department-level spending summaries
+- PDF and CSV exports
+
+### Additional Features
+- In-app notifications
+- Arabic and English interface
+- Authentication and password recovery
+- Responsive dashboard interfaces
+
+## Security and Architecture
+
+- PostgreSQL Row Level Security (RLS)
+- Organization-scoped data access
+- Role-based permissions
+- Database-level single-organization membership enforcement
+- Supabase authentication
+- Server-side API routes for selected workflows
+
+## Local Development
+
+### Prerequisites
+
+- Node.js
+- npm
+- A configured Supabase project
+
+### Installation
+
+```bash
+git clone https://github.com/kareemtawaha0-alt/spendwise-business.git
+cd spendwise-business
+npm install
+```
+
+Configure the required environment variables in `.env.local`, using the variable names expected by the project.
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Status
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Spendwise Business is a portfolio project demonstrating full-stack development, database design, authentication, authorization, and business workflow implementation.
 
-## Learn More
+The application is not currently presented as a commercially launched SaaS product.
 
-To learn more about Next.js, take a look at the following resources:
+## Author
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Kareem Tawaha**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[GitHub](https://github.com/kareemtawaha0-alt)
