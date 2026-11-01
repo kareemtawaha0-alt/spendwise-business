@@ -1,0 +1,14 @@
+
+{
+  "Login": {
+    "welcome": "WELCOME BACK",
+    "title": "Sign in to Spendwise",
+    "description": "Enter your credentials to access your business workspace.",
+    "email": "Work email",
+    "password": "Password",
+    "submit": "Sign in to workspace",
+    "loading": "Signing in...",
+    "noAccount": "New to Spendwise?",
+    "createAccount": "Create an account"
+  }
+}
