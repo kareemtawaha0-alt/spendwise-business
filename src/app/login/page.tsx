@@ -94,7 +94,7 @@ export default function LoginPage() {
 
         <div className="relative flex items-center gap-3" dir="ltr">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold shadow-lg shadow-blue-900/40">
-            S
+            $
           </div>
           <span className="text-2xl font-bold tracking-tight">
             spendwise<span className="text-blue-400">.</span>
@@ -192,7 +192,7 @@ export default function LoginPage() {
           dir="ltr"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
-            S
+            $
           </div>
           <span className="text-2xl font-bold">
             spendwise.
