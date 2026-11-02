@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useLanguage } from "@/components/language-provider";
 import { NotificationBell } from "@/components/notification-bell";
+import { FinancialCharts } from "@/components/financial-charts";
 
 type TeamMember = {
   id: string;
@@ -40,14 +40,8 @@ type Role =
 
 const roleNames: Record<Role, { ar: string; en: string }> = {
   owner: { ar: "صاحب الشركة", en: "Owner" },
-  finance_manager: {
-    ar: "المدير المالي",
-    en: "Finance Manager",
-  },
-  department_manager: {
-    ar: "مدير القسم",
-    en: "Department Manager",
-  },
+  finance_manager: { ar: "المدير المالي", en: "Finance Manager" },
+  department_manager: { ar: "مدير القسم", en: "Department Manager" },
   employee: { ar: "موظف", en: "Employee" },
 };
 
@@ -56,9 +50,7 @@ export default function DashboardPage() {
   const { locale } = useLanguage();
   const ar = locale === "ar";
 
-  const [workspace, setWorkspace] = useState<Workspace | null>(
-    null
-  );
+  const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [signingOut, setSigningOut] = useState(false);
@@ -82,15 +74,13 @@ export default function DashboardPage() {
 
         const user = authData.user;
 
-        const {
-          data: memberships,
-          error: membershipError,
-        } = await supabase
-          .from("memberships")
-          .select("organization_id, role, department_id")
-          .eq("user_id", user.id)
-          .eq("status", "active")
-          .limit(1);
+        const { data: memberships, error: membershipError } =
+          await supabase
+            .from("memberships")
+            .select("organization_id, role, department_id")
+            .eq("user_id", user.id)
+            .eq("status", "active")
+            .limit(1);
 
         if (!active) return;
         if (membershipError) throw membershipError;
@@ -102,14 +92,12 @@ export default function DashboardPage() {
 
         const membership = memberships[0];
 
-        const {
-          data: organization,
-          error: organizationError,
-        } = await supabase
-          .from("organizations")
-          .select("name")
-          .eq("id", membership.organization_id)
-          .single();
+        const { data: organization, error: organizationError } =
+          await supabase
+            .from("organizations")
+            .select("name")
+            .eq("id", membership.organization_id)
+            .single();
 
         if (!active) return;
         if (organizationError) throw organizationError;
@@ -138,14 +126,12 @@ export default function DashboardPage() {
         let budgetCount: number | null = null;
 
         if (canManageBudgets) {
-          const {
-            data: budgets,
-            error: budgetsError,
-          } = await supabase
-            .from("budgets")
-            .select("amount")
-            .eq("organization_id", membership.organization_id)
-            .eq("period_start", monthStart);
+          const { data: budgets, error: budgetsError } =
+            await supabase
+              .from("budgets")
+              .select("amount")
+              .eq("organization_id", membership.organization_id)
+              .eq("period_start", monthStart);
 
           if (!active) return;
 
@@ -689,6 +675,12 @@ export default function DashboardPage() {
                     </p>
                   </div>
                 </section>
+              )}
+
+              {isAdmin && (
+                <FinancialCharts
+                  organizationId={workspace.organizationId}
+                />
               )}
 
               {isDepartmentManager && (
