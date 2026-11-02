@@ -92,6 +92,26 @@ export default function DashboardPage() {
 
         const membership = memberships[0];
 
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("full_name")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (!active) return;
+
+        if (profileError) {
+          console.error("Dashboard profile lookup error:", profileError);
+        }
+
+        const savedFullName =
+          profile?.full_name?.trim() ||
+          (typeof user.user_metadata?.full_name === "string"
+            ? user.user_metadata.full_name.trim()
+            : "") ||
+          user.email?.split("@")[0] ||
+          "User";
+
         const { data: organization, error: organizationError } =
           await supabase
             .from("organizations")
@@ -296,10 +316,7 @@ export default function DashboardPage() {
           organizationName: organization.name,
           role: membership.role,
           email: user.email ?? "",
-          fullName:
-            typeof user.user_metadata?.full_name === "string"
-              ? user.user_metadata.full_name
-              : user.email?.split("@")[0] ?? "User",
+          fullName: savedFullName,
           memberCount: countError ? null : count,
           budgetTotal,
           budgetCount,
